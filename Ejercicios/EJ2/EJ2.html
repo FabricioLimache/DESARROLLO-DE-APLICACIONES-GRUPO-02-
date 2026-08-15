@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Cliente | Cuerdas & Amplis</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      color: #fff;
+      padding: 1em 2em;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6em;
+    }
+
+    main {
+      max-width: 500px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+
+    /* El formulario se ve como una tarjeta centrada */
+    form {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 2em;
+    }
+
+    form h2 {
+      margin-top: 0;
+      color: #1a1a1a;
+      border-bottom: 2px solid #f4c542;
+      padding-bottom: 0.3em;
+    }
+
+    /* Cada <li> agrupa una etiqueta + su campo, para ordenarlos en columna */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 1.2em;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4em;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6em;
+      border: 1px solid #999;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+
+    /* Cambia el borde cuando el usuario hace foco en el campo */
+    input:focus {
+      border-color: #f4c542;
+      outline: none;
+    }
+
+    /* Texto pequeño de ayuda debajo de cada campo */
+    .ayuda {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      font-weight: normal;
+      margin-top: 0.3em;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8em;
+      background-color: #1a1a1a;
+      color: #f4c542;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #333;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      color: #ccc;
+      text-align: center;
+      padding: 1em;
+      font-size: 0.9em;
+      margin-top: 2em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Cuerdas & Amplis</h1>
+  </header>
+
+  <main>
+    <!-- ========================================================
+         <form>: contenedor del formulario.
+         action -> a qué URL/script se enviarían los datos (aquí es
+                   solo un ejemplo, no hay backend real).
+         method -> con qué método HTTP se envían los datos
+                   (post = los datos van "ocultos" en el cuerpo de
+                   la petición, ideal para datos sensibles como
+                   contraseñas; get los mostraría en la URL).
+    ========================================================= -->
+    <form action="/registro-cliente" method="post">
+      <h2>Registro de Cliente</h2>
+
+      <ul>
+        <!-- ==================================================
+             CAMPO: Nombre completo
+             required   -> el campo no puede quedar vacío
+             minlength  -> mínimo de caracteres permitidos
+             maxlength  -> máximo de caracteres permitidos
+             pattern    -> expresión regular (regex) que el valor
+                           debe cumplir para considerarse válido.
+
+             Regex usado: ^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$
+             - ^ y $      -> marcan inicio y fin del texto completo
+             - [A-Za-z...] -> solo permite letras (mayúsculas,
+                               minúsculas y letras con tilde/ñ)
+             - " "        -> también permite espacios (para
+                               nombres compuestos)
+             - +          -> exige al menos un carácter de ese tipo
+             En resumen: no deja escribir números ni símbolos.
+        =================================================== -->
+        <li>
+          <label for="nombre">Nombre completo:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="cliente_nombre"
+            required
+            minlength="3"
+            maxlength="50"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
+            placeholder="Ej: Arturo Quispe">
+          <span class="ayuda">Solo letras y espacios (3 a 50 caracteres).</span>
+        </li>
+
+        <!-- ==================================================
+             CAMPO: Correo electrónico
+             type="email" ya activa una validación básica del
+             navegador (exige un "algo@algo"). Además reforzamos
+             con pattern un formato más estricto:
+
+             Regex usado: ^[\w.-]+@[\w-]+\.[a-zA-Z]{2,}$
+             - [\w.-]+     -> uno o más caracteres alfanuméricos,
+                               puntos o guiones (la parte antes del @)
+             - @           -> obliga literalmente el símbolo arroba
+             - [\w-]+      -> el dominio (ej: gmail, hotmail)
+             - \.          -> un punto literal antes de la extensión
+             - [a-zA-Z]{2,}-> la extensión del dominio, mínimo 2
+                               letras (ej: com, pe, net)
+        =================================================== -->
+        <li>
+          <label for="correo">Correo electrónico:</label>
+          <input
+            type="email"
+            id="correo"
+            name="cliente_correo"
+            required
+            maxlength="60"
+            pattern="^[\w.-]+@[\w-]+\.[a-zA-Z]{2,}$"
+            placeholder="Ej: arturo@correo.com">
+          <span class="ayuda">Formato válido: usuario@dominio.com</span>
+        </li>
+
+        <!-- ==================================================
+             CAMPO: Contraseña
+             type="password" oculta el texto que se escribe.
+
+             Regex usado: ^(?=.*[A-Za-z])(?=.*\d).{8,}$
+             - (?=.*[A-Za-z]) -> "lookahead": exige que en algún
+                                   lugar del texto haya al menos
+                                   una letra (sin consumir texto)
+             - (?=.*\d)       -> exige que exista al menos un
+                                   número en algún lugar
+             - .{8,}          -> el texto completo debe tener
+                                   8 caracteres o más
+             En resumen: la contraseña debe combinar letras y
+             números, y tener mínimo 8 caracteres.
+        =================================================== -->
+        <li>
+          <label for="clave">Contraseña:</label>
+          <input
+            type="password"
+            id="clave"
+            name="cliente_clave"
+            required
+            minlength="8"
+            maxlength="20"
+            pattern="^(?=.*[A-Za-z])(?=.*\d).{8,}$"
+            placeholder="Mínimo 8 caracteres">
+          <span class="ayuda">Debe incluir letras y números (8 a 20 caracteres).</span>
+        </li>
+
+        <!-- ==================================================
+             CAMPO: Teléfono (opcional, tipo tel)
+             pattern aquí exige exactamente 9 dígitos numéricos,
+             formato típico de celulares en Perú.
+
+             Regex usado: ^[0-9]{9}$
+             - ^ y $   -> inicio y fin exactos del texto
+             - [0-9]   -> solo dígitos del 0 al 9
+             - {9}     -> exactamente 9 repeticiones
+        =================================================== -->
+        <li>
+          <label for="telefono">Teléfono (opcional):</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="cliente_telefono"
+            maxlength="9"
+            pattern="^[0-9]{9}$"
+            placeholder="Ej: 987654321">
+          <span class="ayuda">9 dígitos numéricos, sin espacios.</span>
+        </li>
+      </ul>
+
+      <!-- ==================================================
+           Botón de envío. type="submit" hace que, al hacer clic,
+           el navegador valide TODOS los campos con required/
+           pattern/minlength/maxlength antes de intentar enviar
+           el formulario. Si algo falla, muestra un mensaje de
+           error nativo y no envía nada.
+      =================================================== -->
+      <button type="submit">Crear cuenta</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Cuerdas & Amplis - Arequipa, Perú</p>
+  </footer>
+
+</body>
+</html>
