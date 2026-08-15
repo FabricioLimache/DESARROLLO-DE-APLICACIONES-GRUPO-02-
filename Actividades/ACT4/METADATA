@@ -1,0 +1,111 @@
+<!-a)->
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>&lt;title&gt; element</title>
+  </head>
+  <body>
+    <h1>&lt;h1&gt; element</h1>
+  </body>
+</html>
+
+<!-b)->
+<!-- Primer código – ISO-8859-1:
+Se utiliza la codificación ISO-8859-1, que permite representar principalmente caracteres de idiomas occidentales, 
+pero no incluye los caracteres japoneses. 
+Por eso, el texto ご飯が熱い。 no se muestra correctamente en la página. -->
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width">
+    <title>&lt;title&gt; element</title>
+  </head>
+
+  <body>
+    <h1>&lt;h1&gt; element</h1>
+
+    <p>Ejemplo en japonés: ご飯が熱い。</p>
+  </body>
+</html>
+
+<!-- Segundo código – UTF-8:
+Se utiliza la codificación UTF-8, que permite representar una gran variedad de caracteres y alfabetos, 
+incluyendo japonés, chino, árabe, español, etc. 
+Por ello, el texto ご飯が熱い。 se muestra correctamente. -->
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>&lt;title&gt; element</title>
+  </head>
+
+  <body>
+    <h1>&lt;h1&gt; element</h1>
+
+    <p>Ejemplo en japonés: ご飯が熱い。</p>
+  </body>
+</html>
+
+<!-c)->
+<html xmlns="http://www.w3.org/1999/xhtml" class="private">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src chrome:; img-src chrome: blob:; object-src 'none';"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="chrome://browser/skin/privatebrowsing/favicon.svg" />
+    <link
+      rel="stylesheet"
+      href="chrome://browser/content/aboutPrivateBrowsing.css"
+      media="all"
+    />
+<!-d)->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Mi página web</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mi página web">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="imagen.jpg">
+    <meta property="og:url" content="https://mipagina.com">
+</head>
+
+<body>
+
+    <h1>Mi página web</h1>
+
+    <p>Ejemplo sencillo de Open Graph.</p>
+
+</body>
+</html>
+
+<!-- og:title → establece el título que se mostrará al compartir la página.
+og:type → indica que el contenido es un sitio web.
+og:image → indica la imagen que acompañará la publicación.
+og:url → indica la dirección de la página web. -->
+
+<!-e)->
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta name="twitter:title"
+      content="Mi Página Web - Experiencia de Práctica N° 03">
+
+<meta name="twitter:description"
+      content="Ejemplo práctico del uso de Metadata en HTML.">
+
+<meta name="twitter:image"
+      content="https://via.placeholder.com/1200x630.png">
