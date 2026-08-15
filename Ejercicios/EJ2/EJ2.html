@@ -81,13 +81,35 @@
       outline: none;
     }
 
-    /* Texto pequeño de ayuda debajo de cada campo */
+    /* Texto pequeño de ayuda debajo de cada campo (siempre visible) */
     .ayuda {
       display: block;
       font-size: 0.8em;
       color: #666;
       font-weight: normal;
       margin-top: 0.3em;
+    }
+
+    /* ====================================================
+       Estilos para el sistema de mensajes de error propio.
+       .campo-invalido -> se agrega por JS al <li> cuando el
+       campo no pasa la validación, y pone el borde del input
+       en rojo para que el usuario ubique rápido el campo.
+       .error-msg -> texto rojo que aparece SOLO cuando hay
+       un error; está vacío y oculto por defecto.
+    ===================================================== */
+    .campo-invalido input {
+      border-color: #c0392b;
+      background-color: #fdf1f0;
+    }
+
+    .error-msg {
+      display: block;
+      font-size: 0.8em;
+      color: #c0392b;
+      font-weight: bold;
+      margin-top: 0.3em;
+      min-height: 1em;
     }
 
     button {
@@ -103,6 +125,39 @@
 
     button:hover {
       background-color: #333;
+    }
+
+    /* Mensaje general que aparece arriba del formulario si se
+       intentó enviar y todavía hay campos con error */
+    #resumen-error {
+      display: none;
+      background-color: #fdf1f0;
+      border: 1px solid #c0392b;
+      color: #c0392b;
+      padding: 0.8em 1em;
+      border-radius: 4px;
+      margin-bottom: 1em;
+      font-size: 0.9em;
+    }
+
+    #resumen-error.mostrar {
+      display: block;
+    }
+
+    /* Mensaje de éxito si el formulario pasa todas las validaciones */
+    #resumen-exito {
+      display: none;
+      background-color: #eafaf1;
+      border: 1px solid #27ae60;
+      color: #1e8449;
+      padding: 0.8em 1em;
+      border-radius: 4px;
+      margin-bottom: 1em;
+      font-size: 0.9em;
+    }
+
+    #resumen-exito.mostrar {
+      display: block;
     }
 
     footer {
@@ -130,9 +185,24 @@
                    (post = los datos van "ocultos" en el cuerpo de
                    la petición, ideal para datos sensibles como
                    contraseñas; get los mostraría en la URL).
+         novalidate -> le decimos al navegador que NO muestre sus
+                   burbujas de error nativas, porque nosotros vamos
+                   a mostrar nuestros propios mensajes con JS. Los
+                   atributos required/pattern/minlength/maxlength
+                   se siguen evaluando igual, solo cambia quién
+                   muestra el mensaje.
     ========================================================= -->
-    <form action="/registro-cliente" method="post">
+    <form id="form-registro" action="/registro-cliente" method="post" novalidate>
       <h2>Registro de Cliente</h2>
+
+      <!-- Aviso general: se activa por JS si hay campos inválidos -->
+      <div id="resumen-error" role="alert">
+        Por favor revisa los campos marcados en rojo antes de continuar.
+      </div>
+      <!-- Aviso de éxito: se activa por JS si todo el formulario es válido -->
+      <div id="resumen-exito" role="status">
+        ¡Datos válidos! El registro está listo para enviarse.
+      </div>
 
       <ul>
         <!-- ==================================================
@@ -152,7 +222,7 @@
              - +          -> exige al menos un carácter de ese tipo
              En resumen: no deja escribir números ni símbolos.
         =================================================== -->
-        <li>
+        <li data-campo="nombre">
           <label for="nombre">Nombre completo:</label>
           <input
             type="text"
@@ -164,6 +234,8 @@
             pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
             placeholder="Ej: Arturo Quispe">
           <span class="ayuda">Solo letras y espacios (3 a 50 caracteres).</span>
+          <!-- Aquí JS escribe el mensaje de error específico -->
+          <span class="error-msg" id="error-nombre" aria-live="polite"></span>
         </li>
 
         <!-- ==================================================
@@ -181,7 +253,7 @@
              - [a-zA-Z]{2,}-> la extensión del dominio, mínimo 2
                                letras (ej: com, pe, net)
         =================================================== -->
-        <li>
+        <li data-campo="correo">
           <label for="correo">Correo electrónico:</label>
           <input
             type="email"
@@ -192,6 +264,7 @@
             pattern="^[\w.-]+@[\w-]+\.[a-zA-Z]{2,}$"
             placeholder="Ej: arturo@correo.com">
           <span class="ayuda">Formato válido: usuario@dominio.com</span>
+          <span class="error-msg" id="error-correo" aria-live="polite"></span>
         </li>
 
         <!-- ==================================================
@@ -209,7 +282,7 @@
              En resumen: la contraseña debe combinar letras y
              números, y tener mínimo 8 caracteres.
         =================================================== -->
-        <li>
+        <li data-campo="clave">
           <label for="clave">Contraseña:</label>
           <input
             type="password"
@@ -221,19 +294,21 @@
             pattern="^(?=.*[A-Za-z])(?=.*\d).{8,}$"
             placeholder="Mínimo 8 caracteres">
           <span class="ayuda">Debe incluir letras y números (8 a 20 caracteres).</span>
+          <span class="error-msg" id="error-clave" aria-live="polite"></span>
         </li>
 
         <!-- ==================================================
              CAMPO: Teléfono (opcional, tipo tel)
              pattern aquí exige exactamente 9 dígitos numéricos,
-             formato típico de celulares en Perú.
+             formato típico de celulares en Perú. Como no lleva
+             "required", el campo vacío se considera válido.
 
              Regex usado: ^[0-9]{9}$
              - ^ y $   -> inicio y fin exactos del texto
              - [0-9]   -> solo dígitos del 0 al 9
              - {9}     -> exactamente 9 repeticiones
         =================================================== -->
-        <li>
+        <li data-campo="telefono">
           <label for="telefono">Teléfono (opcional):</label>
           <input
             type="tel"
@@ -243,15 +318,15 @@
             pattern="^[0-9]{9}$"
             placeholder="Ej: 987654321">
           <span class="ayuda">9 dígitos numéricos, sin espacios.</span>
+          <span class="error-msg" id="error-telefono" aria-live="polite"></span>
         </li>
       </ul>
 
       <!-- ==================================================
-           Botón de envío. type="submit" hace que, al hacer clic,
-           el navegador valide TODOS los campos con required/
-           pattern/minlength/maxlength antes de intentar enviar
-           el formulario. Si algo falla, muestra un mensaje de
-           error nativo y no envía nada.
+           Botón de envío. type="submit" dispara el evento
+           "submit" del formulario, que interceptamos con JS
+           para revisar cada campo y decidir si dejamos pasar
+           el envío o lo bloqueamos mostrando los errores.
       =================================================== -->
       <button type="submit">Crear cuenta</button>
     </form>
@@ -260,6 +335,112 @@
   <footer>
     <p>&copy; 2026 Cuerdas & Amplis - Arequipa, Perú</p>
   </footer>
+
+  <!-- ========================================================
+       JAVASCRIPT DE VALIDACIÓN
+       El navegador YA valida required/pattern/minlength/maxlength
+       solo, pero su mensaje ("Complete este campo", "Coincida
+       con el formato solicitado"...) es genérico y en algunos
+       navegadores aparece en inglés. Aquí lo reemplazamos por
+       mensajes propios, claros y en español, usando el objeto
+       ValidityState de cada input (input.validity).
+  ========================================================= -->
+  <script>
+    // Diccionario de mensajes personalizados por campo y por tipo
+    // de error. "validity.XXXX" es true cuando ESE tipo de error
+    // ocurre en el campo (lo entrega el navegador automáticamente).
+    const mensajes = {
+      nombre: {
+        valueMissing: "Ingresa tu nombre completo.",
+        patternMismatch: "El nombre solo puede contener letras y espacios.",
+        tooShort: "El nombre debe tener al menos 3 caracteres.",
+        tooLong: "El nombre no puede superar los 50 caracteres."
+      },
+      correo: {
+        valueMissing: "Ingresa tu correo electrónico.",
+        typeMismatch: "Escribe un correo válido (ej: nombre@dominio.com).",
+        patternMismatch: "El correo no tiene un formato válido (usuario@dominio.com).",
+        tooLong: "El correo no puede superar los 60 caracteres."
+      },
+      clave: {
+        valueMissing: "Crea una contraseña para tu cuenta.",
+        patternMismatch: "La contraseña debe combinar letras y números.",
+        tooShort: "La contraseña debe tener al menos 8 caracteres.",
+        tooLong: "La contraseña no puede superar los 20 caracteres."
+      },
+      telefono: {
+        patternMismatch: "El teléfono debe tener exactamente 9 dígitos numéricos.",
+        tooLong: "El teléfono debe tener exactamente 9 dígitos."
+      }
+    };
+
+    // Devuelve el mensaje de error adecuado para un input,
+    // revisando su ValidityState de arriba hacia abajo.
+    function obtenerMensaje(input) {
+      const v = input.validity;
+      const dic = mensajes[input.id] || {};
+
+      if (v.valid) return "";
+      if (v.valueMissing) return dic.valueMissing || "Este campo es obligatorio.";
+      if (v.typeMismatch) return dic.typeMismatch || "El formato ingresado no es válido.";
+      if (v.tooShort) return dic.tooShort || "El texto ingresado es demasiado corto.";
+      if (v.tooLong) return dic.tooLong || "El texto ingresado es demasiado largo.";
+      if (v.patternMismatch) return dic.patternMismatch || "El formato ingresado no es válido.";
+      return "Revisa este campo.";
+    }
+
+    // Pinta (o limpia) el mensaje de error de un campo específico.
+    function validarCampo(input) {
+      const li = input.closest("li");
+      const spanError = document.getElementById("error-" + input.id);
+      const mensaje = obtenerMensaje(input);
+
+      if (mensaje) {
+        li.classList.add("campo-invalido");
+        spanError.textContent = mensaje;
+      } else {
+        li.classList.remove("campo-invalido");
+        spanError.textContent = "";
+      }
+      return mensaje === "";
+    }
+
+    const form = document.getElementById("form-registro");
+    const resumenError = document.getElementById("resumen-error");
+    const resumenExito = document.getElementById("resumen-exito");
+    const campos = form.querySelectorAll("input");
+
+    // Mientras el usuario escribe, vamos limpiando el error de
+    // ESE campo apenas vuelve a ser válido (mejor experiencia
+    // que esperar a que reenvíe todo el formulario).
+    campos.forEach((input) => {
+      input.addEventListener("input", () => validarCampo(input));
+    });
+
+    // Al enviar el formulario, validamos TODOS los campos antes
+    // de dejar pasar el envío.
+    form.addEventListener("submit", (evento) => {
+      evento.preventDefault(); // evitamos el envío real (no hay backend en este ejemplo)
+
+      let formularioValido = true;
+      campos.forEach((input) => {
+        const campoOk = validarCampo(input);
+        if (!campoOk) formularioValido = false;
+      });
+
+      if (formularioValido) {
+        resumenError.classList.remove("mostrar");
+        resumenExito.classList.add("mostrar");
+      } else {
+        resumenExito.classList.remove("mostrar");
+        resumenError.classList.add("mostrar");
+        // Llevamos el foco al primer campo con error para que el
+        // usuario no tenga que buscarlo manualmente.
+        const primerInvalido = form.querySelector(".campo-invalido input");
+        if (primerInvalido) primerInvalido.focus();
+      }
+    });
+  </script>
 
 </body>
 </html>
