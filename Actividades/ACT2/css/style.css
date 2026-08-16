@@ -1,9 +1,16 @@
 form {
-    margin: 0 auto;
+    margin: 40px auto;
     width: 400px;
-    padding: 1em;
+    padding: 1.5em;
+    background-color: #fff;
     border: 1px solid #CCC;
     border-radius: 1em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    background-color: #f4f4f4;
+    font-family: sans-serif;
 }
 
 ul {
@@ -28,11 +35,14 @@ textarea {
     width: 300px;
     box-sizing: border-box;
     border: 1px solid #999;
+    border-radius: 4px;
+    padding: 0.4em;
 }
 
 input:focus,
 textarea:focus {
-    border-color: #000;
+    border-color: #0E7C7B;
+    outline: none;
 }
 
 textarea {
@@ -46,4 +56,14 @@ textarea {
 
 button {
     margin-left: .5em;
+    padding: 0.5em 1.2em;
+    border: none;
+    border-radius: 4px;
+    background-color: #0E7C7B;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0A5F5E;
 }
