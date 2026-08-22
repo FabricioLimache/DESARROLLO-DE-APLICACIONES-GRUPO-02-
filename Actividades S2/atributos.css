@@ -1,0 +1,13 @@
+/******************************************************
+ARCHIVO : pseudoelementos.css
+AUTOR : ARTURO BENITES
+FECHA : 22/08/2026
+DESCRIPCIÓN : Reglas CSS que usan al menos 7 pseudo-elementos distintos
+*******************************************************/
+.parrafo::first-letter { color: #000000; font-size: large; font-weight: bold; }
+.parrafo::first-line { color: #4b0082; }
+.cita::before { content: "\201C"; font-size: 24px; color: gray; }
+.cita::after { content: "\201D"; font-size: 24px; color: gray; }
+.campo::placeholder { color: #aaaaaa; font-style: italic; }
+.lista-marcador li::marker { color: crimson; font-weight: bold; }
+.seleccionable::selection { background-color: gold; color: black; }
