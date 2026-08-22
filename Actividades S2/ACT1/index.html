@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css vinculado</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <header>
+    <h1>Café de Especialidad</h1>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio">
+      <h2>Bienvenido</h2>
+      <p>Descubre el mejor café de origen, tostado artesanalmente y preparado con dedicación para ofrecerte una experiencia única en cada taza.</p>
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600" alt="Taza de café">
+    </section>
+
+    <section id="productos">
+      <h2>Nuestros Productos</h2>
+      <article class="producto">
+        <h3>Café Arábica</h3>
+        <p>Grano seleccionado de las mejores fincas, con notas dulces y afrutadas.</p>
+        <span class="precio">S/ 25.00</span>
+      </article>
+      <article class="producto">
+        <h3>Café Robusta</h3>
+        <p>Sabor intenso y cuerpo fuerte, ideal para los amantes del espresso.</p>
+        <span class="precio">S/ 20.00</span>
+      </article>
+      <article class="producto">
+        <h3>Blend Especial</h3>
+        <p>Mezcla exclusiva de la casa, equilibrada y aromática.</p>
+        <span class="precio">S/ 30.00</span>
+      </article>
+    </section>
+
+    <section id="nosotros">
+      <h2>Sobre Nosotros</h2>
+      <p>Somos una empresa familiar dedicada al cultivo y tostado de café desde hace más de 20 años, comprometidos con la calidad y el comercio justo.</p>
+      <div class="destacado">
+        <p>Más de <strong>20 años</strong> de experiencia en el mundo del café.</p>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contáctanos</h2>
+      <form>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre">
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" placeholder="Escribe tu correo">
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje"></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Café de Especialidad. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
