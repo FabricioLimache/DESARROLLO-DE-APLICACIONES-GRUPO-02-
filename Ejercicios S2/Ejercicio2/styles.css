@@ -1,0 +1,85 @@
+/* SOLO SE ACTUALIZA EL STYLES */
+#header-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: #1c1c1c;
+}
+
+.nav-principal {
+  display: flex;
+  gap: 24px;
+}
+
+#formulario-contacto form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.lista-valores,
+.lista-contacto {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.galeria-equipo {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+
+@media (max-width: 768px) {
+  #header-principal {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .nav-principal {
+    gap: 16px;
+  }
+
+  .galeria {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .galeria-equipo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #hero {
+    padding: 40px 20px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+
+  .galeria,
+  .galeria-equipo {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion {
+    padding: 30px 16px;
+  }
+
+  .nav-principal {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
