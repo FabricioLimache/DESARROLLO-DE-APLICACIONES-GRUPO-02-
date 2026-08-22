@@ -1,0 +1,246 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1c1c1c;
+  background-color: #fdfdfb;
+}
+
+h1 { font-size: 2rem; color: #1c1c1c; }
+h2 { font-size: 1.5rem; color: #1c1c1c; margin-bottom: 16px; }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p  { color: #3a3a3a; }
+a  { color: #7a4b2f; text-decoration: none; }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+}
+
+
+#header-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: #1c1c1c;
+}
+
+#header-principal .logo {
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.3rem;
+}
+
+#hero {
+  padding: 60px 40px;
+  background: linear-gradient(120deg, #f3e9dd, #ece2f5);
+  text-align: center;
+}
+
+#hero h1 { max-width: 700px; margin: 0 auto 16px; }
+#hero p  { max-width: 500px; margin: 0 auto 24px; }
+
+#formulario-contacto form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+
+.nav-principal {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-principal a {
+  color: #f0e9df;
+  font-weight: 600;
+  padding: 6px 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.nav-principal a:hover,
+.nav-principal a:focus-visible {
+  color: #d9a86c;
+  border-bottom-color: #d9a86c;
+}
+
+.nav-principal a[aria-current="page"] {
+  border-bottom-color: #d9a86c;
+}
+
+.seccion {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 50px 24px;
+}
+
+.seccion-nosotros p {
+  max-width: 700px;
+  font-size: 1.05rem;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.galeria-equipo {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tarjeta {
+  background-color: #fff;
+  border: 1px solid #e6e0d8;
+  border-radius: 8px;
+  padding: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.imagen {
+  height: 160px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.imagen-1 { background-color: #c99a6c; }
+.imagen-2 { background-color: #a68bd1; }
+.imagen-3 { background-color: #6ea8c9; }
+.imagen-4 { background-color: #c96e78; }
+.imagen-equipo-1 { background-color: #d9a86c; }
+.imagen-equipo-2 { background-color: #8fb08f; }
+.imagen-equipo-3 { background-color: #b48ac9; }
+
+.lista-valores,
+.lista-contacto {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lista-valores li,
+.lista-contacto li {
+  padding-left: 20px;
+  position: relative;
+}
+
+.lista-valores li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #7a4b2f;
+  font-weight: bold;
+}
+
+.pie {
+  background-color: #1c1c1c;
+  color: #f0e9df;
+}
+
+
+.btn-animado {
+  display: inline-block;
+  background-color: #7a4b2f;
+  color: #fff;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transform: translateY(0) scale(1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  animation: aparecer-boton 0.6s ease-out both;
+}
+
+.btn-animado:hover,
+.btn-animado:focus-visible {
+  background-color: #5c3821;
+  transform: translateY(0) scale(1.05);
+}
+
+@keyframes aparecer-boton {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== Accesibilidad (Punto 4) ===== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #d9a86c;
+  outline-offset: 2px;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+input,
+textarea {
+  font: inherit;
+  padding: 10px;
+  border: 1px solid #c9c2b6;
+  border-radius: 4px;
+}
+
+
+@media (max-width: 768px) {
+  #header-principal {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .nav-principal { gap: 16px; }
+
+  .galeria { grid-template-columns: repeat(2, 1fr); }
+  .galeria-equipo { grid-template-columns: repeat(2, 1fr); }
+
+  #hero { padding: 40px 20px; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+
+  .galeria,
+  .galeria-equipo {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion { padding: 30px 16px; }
+
+  .nav-principal {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
