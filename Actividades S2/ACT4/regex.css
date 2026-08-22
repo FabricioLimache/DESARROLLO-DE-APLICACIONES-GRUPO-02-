@@ -1,0 +1,13 @@
+/******************************************************
+ARCHIVO : regex.css
+AUTOR : ARTURO BENITES
+FECHA : 22/08/2026
+DESCRIPCIÓN : Selectores basados en patrones de coincidencia (regex), 5 casos
+*******************************************************/
+a[href^="#"] { background-color: gold; }                    /* 1. Empieza con # */
+a[href$=".org"] { color: red; }                              /* 2. Termina con .org */
+a[href^="https"][href$=".pe"] { color: green; }               /* 3. Empieza con https y termina en .pe */
+a[href*="CASE" i] { color: pink; }                            /* 4. Contiene "case" (insensible a mayúsculas) */
+[class^="btn-"] { padding: 8px; border-radius: 4px; background: #2c3e50; color: white; } /* 5. Clase empieza con btn- */
+[class$="-usuario"] { border: 1px solid #999; }
+[class*="icono"] { font-style: italic; }

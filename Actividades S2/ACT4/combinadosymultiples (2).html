@@ -1,0 +1,34 @@
+<!--ARCHIVO : combinadosymultiples.html -->
+<!--AUTOR : ARTURO BENITES -->
+<!--FECHA : 22/08/2026 -->
+<!--DESCRIPCIÓN : Documento web para selectores combinados y múltiples -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combinados y múltiples</title>
+<link rel="stylesheet" href="./combinadosymultiples.css">
+</head>
+<body>
+    <div id="contenedor">
+        <ul>
+            <li><a href="#">Enlace descendiente en lista</a></li>
+        </ul>
+        <p>Párrafo hijo directo de contenedor</p>
+    </div>
+
+    <ul id="lista2"><li>Elemento suelto</li></ul>
+    <p>Párrafo adyacente inmediato a la lista (+)</p>
+    <span>Este span no se ve afectado por el adyacente</span>
+
+    <h2>Título con hermanos</h2>
+    <p>Hermano 1 de h2 (~)</p>
+    <p>Hermano 2 de h2 (~)</p>
+
+    <div>div de prueba múltiple</div>
+    <p>p de prueba múltiple</p>
+    <span>span de prueba múltiple</span>
+    <em>em (no incluido en el segundo grupo)</em>
+</body>
+</html>
