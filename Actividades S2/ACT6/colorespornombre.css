@@ -1,0 +1,44 @@
+/* ==========================================================
+   Configuración de colores a través del nombre
+   ========================================================== */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+
+/* ==========================================================
+   CASO 1: COLOR DEL TEXTO
+   Se utiliza el nombre "blue" para establecer
+   el color del título.
+   ========================================================== */
+
+.titulo {
+    color: blue;
+}
+
+
+/* ==========================================================
+   CASO 2: COLOR DE FONDO
+   Se utiliza el nombre "yellow" para establecer
+   el color de fondo del párrafo.
+   ========================================================== */
+
+.parrafo {
+    background-color: yellow;
+    padding: 15px;
+}
+
+
+/* ==========================================================
+   CASO 3: COLOR DEL BORDE
+   Se utiliza el nombre "red" para establecer
+   el color del borde de la caja.
+   ========================================================== */
+
+.caja {
+    border: 5px solid red;
+    padding: 20px;
+    margin-top: 20px;
+}

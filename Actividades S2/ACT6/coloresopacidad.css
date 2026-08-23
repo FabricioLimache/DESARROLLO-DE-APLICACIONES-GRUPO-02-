@@ -1,0 +1,50 @@
+/* ==========================================================
+   Configuración de colores con opacidad
+   ========================================================== */
+
+
+/* Configuración general de la página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+
+/* ==========================================================
+   CASO 1: COLOR DEL TEXTO CON OPACIDAD
+
+   rgba(255, 0, 0, 0.5) representa un color rojo
+   con una opacidad del 50%.
+   ========================================================== */
+
+.titulo {
+    color: rgba(255, 0, 0, 0.5);
+}
+
+
+/* ==========================================================
+   CASO 2: COLOR DE FONDO CON OPACIDAD
+
+   rgba(0, 128, 0, 0.7) representa un color verde
+   con una opacidad del 70%.
+   ========================================================== */
+
+.parrafo {
+    background-color: rgba(0, 128, 0, 0.7);
+    color: rgba(255, 255, 255, 1);
+    padding: 15px;
+}
+
+
+/* ==========================================================
+   CASO 3: BORDE CON OPACIDAD
+
+   rgba(0, 0, 255, 0.4) representa un color azul
+   con una opacidad del 40%.
+   ========================================================== */
+
+.caja {
+    border: 5px solid rgba(0, 0, 255, 0.4);
+    padding: 20px;
+    margin-top: 20px;
+}
