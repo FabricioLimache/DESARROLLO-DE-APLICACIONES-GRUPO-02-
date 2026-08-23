@@ -1,0 +1,52 @@
+/* ---------- MEDIDAS EN PORCENTAJE (%) ---------- */
+
+.caja-porcentaje-1 {
+    width: 30%;
+    height: 80px;
+    border: 2px solid black;
+    background-color: lightblue;
+}
+
+.caja-porcentaje-2 {
+    width: 50%;
+    height: 80px;
+    border: 2px solid black;
+    background-color: lightgreen;
+}
+
+.caja-porcentaje-3 {
+    width: 70%;
+    height: 80px;
+    border: 2px solid black;
+    background-color: lightyellow;
+}
+
+
+/* ---------- MEDIDAS EN EM ---------- */
+
+.texto-em-1 {
+    font-size: 1em;
+}
+
+.texto-em-2 {
+    font-size: 1.5em;
+}
+
+.texto-em-3 {
+    font-size: 2em;
+}
+
+
+/* ---------- MEDIDAS EN REM ---------- */
+
+.texto-rem-1 {
+    font-size: 1rem;
+}
+
+.texto-rem-2 {
+    font-size: 1.5rem;
+}
+
+.texto-rem-3 {
+    font-size: 2rem;
+}
