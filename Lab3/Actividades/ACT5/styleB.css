@@ -1,0 +1,408 @@
+/***********************************************************************
+ARCHIVO      : styleB.css
+AUTOR        : CALCINA CHRISTIAN GABRIEL
+FECHA        : 29/08/2026
+DESCRIPCIÓN  : Estilos responsive con Mobile First e interacción visual
+               mediante transiciones, transformaciones, sombras,
+               bordes redondeados y preferencias de movimiento.
+***********************************************************************/
+
+
+/* =====================================================================
+   CONFIGURACIÓN GENERAL
+   ===================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+/* =====================================================================
+   HEADER - VERSIÓN MÓVIL
+   ===================================================================== */
+
+header {
+
+    background-color: #333;
+
+    color: white;
+
+    padding: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+}
+
+
+/* Título del Header */
+
+header h1 {
+
+    margin: 0;
+
+}
+
+
+/* =====================================================================
+   BOTONES
+   ===================================================================== */
+
+.boton {
+
+    padding: 10px 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #4CAF50;
+
+    color: white;
+
+    cursor: pointer;
+
+
+    /*
+       Se especifican solamente las propiedades
+       que realmente van a cambiar.
+    */
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease;
+
+}
+
+
+/* Efecto del botón al pasar el cursor */
+
+.boton:hover {
+
+    transform: translateY(-2px);
+
+    background-color: #388E3C;
+
+}
+
+
+/* =====================================================================
+   NAVEGACIÓN - VERSIÓN MÓVIL
+   ===================================================================== */
+
+nav {
+
+    background-color: #555;
+
+    padding: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+/* Enlaces */
+
+nav a {
+
+    color: white;
+
+    text-decoration: none;
+
+}
+
+
+/* =====================================================================
+   HERO - VERSIÓN MÓVIL
+   ===================================================================== */
+
+.hero {
+
+    background-color: #4CAF50;
+
+    color: white;
+
+    padding: 50px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 20px;
+
+
+    /* Bordes redondeados */
+
+    border-radius: 0 0 20px 20px;
+
+}
+
+
+/* Título adaptable */
+
+.hero h2 {
+
+    font-size: clamp(2.2rem, 5vw, 4rem);
+
+}
+
+
+/* Párrafo */
+
+.hero p {
+
+    font-size: 1rem;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================================
+   IMÁGENES RESPONSIVE
+   ===================================================================== */
+
+.hero img {
+
+    max-width: 100%;
+
+    height: auto;
+
+    display: block;
+
+
+    /* Esquinas redondeadas */
+
+    border-radius: 15px;
+
+}
+
+
+/* =====================================================================
+   TARJETAS - CSS GRID
+   ===================================================================== */
+
+.tarjetas {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
+    gap: 20px;
+
+    padding: 30px;
+
+}
+
+
+/* =====================================================================
+   TARJETAS - INTERACCIÓN Y PROFUNDIDAD
+   ===================================================================== */
+
+.tarjeta {
+
+    background-color: #eee;
+
+    padding: 30px;
+
+    text-align: center;
+
+
+    /* Bordes redondeados */
+
+    border-radius: 12px;
+
+
+    /* Sombra inicial */
+
+    box-shadow:
+        0 4px 12px rgb(0 0 0 / 0.12);
+
+
+    /*
+       Se utilizan solamente las propiedades
+       que cambiarán durante la interacción.
+    */
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+/* =====================================================================
+   EFECTO HOVER DE LAS TARJETAS
+   ===================================================================== */
+
+.tarjeta:hover {
+
+    /* Desplazamiento hacia arriba */
+
+    transform: translateY(-5px);
+
+
+    /* Aumento de profundidad */
+
+    box-shadow:
+        0 10px 24px rgb(0 0 0 / 0.18);
+
+}
+
+
+/* =====================================================================
+   TARJETA DESTACADA
+   ===================================================================== */
+
+.tarjeta--destacada {
+
+    /*
+       En pantallas pequeñas ocupa una sola columna.
+    */
+
+    grid-column: auto;
+
+}
+
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+
+footer {
+
+    background-color: #333;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+
+
+    /* Bordes redondeados */
+
+    border-radius: 20px 20px 0 0;
+
+}
+
+
+/* =====================================================================
+   BREAKPOINT PRINCIPAL - 800px
+   ===================================================================== */
+
+@media (min-width: 800px) {
+
+
+    /* ================================================================
+       HEADER - ESCRITORIO
+       ================================================================ */
+
+    header {
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+    }
+
+
+    /* ================================================================
+       NAVEGACIÓN - ESCRITORIO
+       ================================================================ */
+
+    nav {
+
+        flex-direction: row;
+
+        justify-content: center;
+
+    }
+
+
+    /* ================================================================
+       HERO - ESCRITORIO
+       ================================================================ */
+
+    .hero {
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 30px;
+
+    }
+
+}
+
+
+/* =====================================================================
+   TARJETA DESTACADA - 900px
+   ===================================================================== */
+
+@media (min-width: 900px) {
+
+    /*
+       A partir de 900px la tarjeta destacada
+       ocupa dos columnas.
+    */
+
+    .tarjeta--destacada {
+
+        grid-column: span 2;
+
+    }
+
+}
+
+
+/* =====================================================================
+   PREFERENCIAS DEL USUARIO
+   ===================================================================== */
+
+/*
+   Si el usuario ha configurado su dispositivo para reducir
+   el movimiento, se eliminan las transiciones.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    .tarjeta,
+    .boton {
+
+        transition: none;
+
+    }
+
+}

@@ -1,0 +1,288 @@
+/***********************************************************************
+ARCHIVO      : style.css
+AUTOR        : CALCINA CHRISTIAN GABRIEL
+FECHA        : 29/08/2026
+DESCRIPCIÓN  : Hoja de estilos responsive utilizando Mobile First,
+               Flexbox, CSS Grid, imágenes adaptables y Media Queries.
+***********************************************************************/
+
+
+/* =====================================================================
+   CONFIGURACIÓN GENERAL
+   ===================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =====================================================================
+   HEADER - VERSIÓN MÓVIL
+   ===================================================================== */
+
+header {
+
+    background-color: #333;
+
+    color: white;
+
+    padding: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+}
+
+
+/* Elimina el margen predeterminado del título */
+
+header h1 {
+    margin: 0;
+}
+
+
+/* Botón del Header */
+
+header button {
+
+    padding: 10px 15px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================================
+   NAVEGACIÓN - VERSIÓN MÓVIL
+   ===================================================================== */
+
+nav {
+
+    background-color: #555;
+
+    padding: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+nav a {
+
+    color: white;
+
+    text-decoration: none;
+}
+
+
+/* =====================================================================
+   HERO - VERSIÓN MÓVIL
+   ===================================================================== */
+
+.hero {
+
+    background-color: #4CAF50;
+
+    color: white;
+
+    padding: 50px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 20px;
+}
+
+
+/* Texto del Hero */
+
+.hero h2 {
+
+    font-size: clamp(2.2rem, 5vw, 4rem);
+
+}
+
+
+/* Párrafo del Hero */
+
+.hero p {
+
+    font-size: 1rem;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================================
+   IMÁGENES RESPONSIVE
+   ===================================================================== */
+
+.hero img {
+
+    max-width: 100%;
+
+    height: auto;
+
+    display: block;
+}
+
+
+/* =====================================================================
+   TARJETAS - CSS GRID
+   ===================================================================== */
+
+.tarjetas {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
+    gap: 20px;
+
+    padding: 30px;
+}
+
+
+/* Estilo general de las tarjetas */
+
+.tarjeta {
+
+    background-color: #eee;
+
+    padding: 30px;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================================
+   TARJETA DESTACADA - VERSIÓN MÓVIL
+   ===================================================================== */
+
+.tarjeta--destacada {
+
+    grid-column: auto;
+
+}
+
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+
+footer {
+
+    background-color: #333;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+
+}
+
+
+/* =====================================================================
+   BREAKPOINT PRINCIPAL - 800px
+   ===================================================================== */
+
+/*
+   A partir de aproximadamente 800px existe suficiente espacio
+   para reorganizar el Header, la navegación y el Hero.
+*/
+
+@media (min-width: 800px) {
+
+
+    /* ================================================================
+       HEADER - ESCRITORIO
+       ================================================================ */
+
+    header {
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+    }
+
+
+    /* ================================================================
+       NAVEGACIÓN - ESCRITORIO
+       ================================================================ */
+
+    nav {
+
+        flex-direction: row;
+
+        justify-content: center;
+
+    }
+
+
+    /* ================================================================
+       HERO - ESCRITORIO
+       ================================================================ */
+
+    .hero {
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 30px;
+
+    }
+
+}
+
+
+/* =====================================================================
+   TARJETA DESTACADA - 900px
+   ===================================================================== */
+
+/*
+   Cuando existe suficiente espacio, la tarjeta destacada
+   ocupa dos columnas del Grid.
+*/
+
+@media (min-width: 900px) {
+
+    .tarjeta--destacada {
+
+        grid-column: span 2;
+
+    }
+
+}
