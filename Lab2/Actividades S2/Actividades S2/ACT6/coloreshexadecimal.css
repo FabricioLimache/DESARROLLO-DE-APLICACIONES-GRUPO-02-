@@ -1,0 +1,47 @@
+/* ==========================================================
+   Configuración de colores a través de código hexadecimal
+   ========================================================== */
+
+
+/* Configuración general de la página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+
+/* ==========================================================
+   CASO 1: COLOR DEL TEXTO
+
+   #FF0000 representa el color rojo.
+   ========================================================== */
+
+.titulo {
+    color: #FF0000;
+}
+
+
+/* ==========================================================
+   CASO 2: COLOR DE FONDO
+
+   #008000 representa el color verde.
+   ========================================================== */
+
+.parrafo {
+    background-color: #008000;
+    color: #FFFFFF;
+    padding: 15px;
+}
+
+
+/* ==========================================================
+   CASO 3: COLOR DEL BORDE
+
+   #0000FF representa el color azul.
+   ========================================================== */
+
+.caja {
+    border: 5px solid #0000FF;
+    padding: 20px;
+    margin-top: 20px;
+}
