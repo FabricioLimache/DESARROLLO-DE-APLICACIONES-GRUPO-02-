@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coolant — control térmico para laptops Linux</title>
+  <meta name="description" content="Coolant gestiona la temperatura y el consumo de tu laptop Linux con GPU híbrida AMD/NVIDIA, sin tocar la terminal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        coolant
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#funciones">Funciones</a>
+        <a href="#perfiles">Perfiles</a>
+        <a href="#cta" class="nav-cta">Descargar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Para Linux · GPU híbrida AMD + NVIDIA</p>
+        <h1>Controla la temperatura de tu laptop antes de que ella te controle a ti.</h1>
+        <p class="hero-sub">
+          Coolant traduce gobernadores de CPU, límites de potencia y offload de GPU en
+          tres controles simples. Sin editar <code>systemd</code>, sin memorizar flags
+          de <code>ryzenadj</code>, sin adivinar por qué el ventilador no para.
+        </p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn btn-primary">Descargar para Linux</a>
+          <a href="#funciones" class="btn btn-ghost">Ver cómo funciona</a>
+        </div>
+      </div>
+
+      <div class="readout-card" aria-hidden="true">
+        <div class="readout-row">
+          <span class="readout-label">CPU · Ryzen</span>
+          <span class="readout-value">54<span class="unit">°C</span></span>
+        </div>
+        <div class="thermal-bar">
+          <span class="thermal-marker" style="--pos: 32%"></span>
+        </div>
+        <div class="readout-row readout-row--small">
+          <span>Antes: 91°C</span>
+          <span>Perfil: Silencioso</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS / FUNCIONES -->
+    <section class="features" id="funciones">
+      <div class="section-head">
+        <p class="eyebrow">Qué hace</p>
+        <h2>Cada ajuste que antes vivía en la terminal, ahora en un panel.</h2>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <p class="feature-index">TDP</p>
+          <h3>Límites de potencia</h3>
+          <p>Ajusta stapm, fast y slow limit con un deslizador. Coolant guarda el valor y lo vuelve a aplicar en cada arranque.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-index">GOV</p>
+          <h3>Perfiles automáticos</h3>
+          <p>Cambia de <em>performance</em> a <em>powersave</em> según estés en cargador o batería, sin que tengas que acordarte.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-index">GPU</p>
+          <h3>Offload con un clic</h3>
+          <p>Decide qué aplicaciones usan la GPU dedicada y cuáles se quedan en la integrada. Nada de variables de entorno a mano.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-index">ALERT</p>
+          <h3>Aviso antes del throttling</h3>
+          <p>Una notificación cuando te acercas al límite térmico, con el proceso responsable señalado, no solo el número.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-index">HIST</p>
+          <h3>Historial de temperatura</h3>
+          <p>Un registro de los últimos días para saber si ese pico de calor fue el navegador, un juego o un widget del escritorio.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-index">SAFE</p>
+          <h3>Reversión segura</h3>
+          <p>Cada perfil guarda el estado anterior. Si algo se pone inestable, un botón te devuelve a los valores de fábrica.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROYECTOS / PRODUCTOS: PERFILES -->
+    <section class="profiles" id="perfiles">
+      <div class="section-head">
+        <p class="eyebrow">Perfiles listos</p>
+        <h2>Empieza desde un perfil hecho para tu tipo de laptop.</h2>
+      </div>
+
+      <div class="profiles-row">
+        <article class="profile-card">
+          <h3>Silencioso</h3>
+          <p class="profile-target">Ultrabooks · uso de oficina</p>
+          <ul class="profile-specs">
+            <li><span>Gobernador</span><span>powersave</span></li>
+            <li><span>Límite sostenido</span><span>15 W</span></li>
+            <li><span>Boost</span><span>desactivado</span></li>
+          </ul>
+        </article>
+
+        <article class="profile-card profile-card--active">
+          <h3>Equilibrado</h3>
+          <p class="profile-target">Laptops híbridas de uso mixto</p>
+          <ul class="profile-specs">
+            <li><span>Gobernador</span><span>powersave / AC</span></li>
+            <li><span>Límite sostenido</span><span>25–30 W</span></li>
+            <li><span>Boost</span><span>limitado</span></li>
+          </ul>
+        </article>
+
+        <article class="profile-card">
+          <h3>Rendimiento</h3>
+          <p class="profile-target">Estaciones de trabajo y juego</p>
+          <ul class="profile-specs">
+            <li><span>Gobernador</span><span>performance</span></li>
+            <li><span>Límite sostenido</span><span>54 W+</span></li>
+            <li><span>Boost</span><span>activo</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="cta">
+      <h2>Tu laptop no tiene por qué sonar como un secador de pelo.</h2>
+      <p>Instálalo, elige un perfil y sigue trabajando. Los ajustes se aplican en cada arranque, sin scripts que mantener.</p>
+      <a href="#" class="btn btn-primary btn-large">Descargar Coolant · .deb / .rpm / AUR</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <span class="logo-mark" aria-hidden="true"></span>
+          coolant
+        </a>
+        <p>Gestión térmica para laptops Linux con GPU híbrida.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <a href="#funciones">Funciones</a>
+        <a href="#perfiles">Perfiles</a>
+        <a href="#cta">Descargar</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <a href="#">Documentación</a>
+        <a href="#">Compatibilidad de hardware</a>
+        <a href="#">Registro de cambios</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <a href="#">Código fuente</a>
+        <a href="#">Contacto</a>
+      </div>
+    </div>
+
+    <p class="footer-legal">© 2026 Coolant. Proyecto académico — Laboratorio N° 03.</p>
+  </footer>
+
+</body>
+</html>
