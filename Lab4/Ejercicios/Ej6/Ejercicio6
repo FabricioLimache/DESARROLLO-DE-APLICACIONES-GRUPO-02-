@@ -1,0 +1,74 @@
+function registrarParticipante(nombre, edad, correo, tipo = "general") {
+  if (!nombre || nombre.trim() === "") {
+    throw new Error("El nombre no puede estar vacío");
+  }
+
+  if (typeof edad !== "number" || isNaN(edad) || edad < 18) {
+    throw new Error("La edad debe ser numérica y mayor o igual a 18");
+  }
+
+  if (!correo || correo.trim() === "") {
+    throw new Error("El correo no puede estar vacío");
+  }
+
+  if (tipo !== "general" && tipo !== "estudiante") {
+    throw new Error('El tipo debe ser "general" o "estudiante"');
+  }
+
+  const costo = tipo === "estudiante" ? 30 : 50;
+
+  return { nombre, edad, correo, tipo, costo };
+}
+
+console.log("\n===== EJERCICIO 6 =====");
+
+const participantes = [];
+
+const datosParticipantes = [
+  ["Andrea Torres", 22, "andrea@mail.com", "estudiante"],
+  ["Carlos Ruiz", 30, "carlos@mail.com", "general"],
+  ["Lucía Fernández", 19, "lucia@mail.com", "estudiante"],
+  ["Mateo Gómez", 25, "mateo@mail.com"],
+  ["Valeria Díaz", 21, "valeria@mail.com", "estudiante"],
+  ["Pedro Sin Edad", 15, "pedro@mail.com", "general"],
+];
+
+for (const [nombre, edad, correo, tipo] of datosParticipantes) {
+  try {
+    const participante =
+      tipo !== undefined
+        ? registrarParticipante(nombre, edad, correo, tipo)
+        : registrarParticipante(nombre, edad, correo);
+
+    participantes.push(participante);
+    console.log("Registrado:", participante);
+  } catch (error) {
+    console.log(`Error al registrar a ${nombre}:`, error.message);
+  }
+}
+
+const soloEstudiantes = participantes.filter(
+  (p) => p.tipo === "estudiante"
+);
+
+console.log("Estudiantes registrados:", soloEstudiantes);
+
+const nombresParticipantes = participantes.map((p) => p.nombre);
+
+console.log("Nombres de participantes:", nombresParticipantes);
+
+const totalRecaudado = participantes.reduce(
+  (acum, p) => acum + p.costo,
+  0
+);
+
+console.log("Total recaudado: S/", totalRecaudado);
+
+const participanteBuscado = participantes.find(
+  (p) => p.correo === "lucia@mail.com"
+);
+
+console.log(
+  "Participante encontrado por correo:",
+  participanteBuscado
+);
