@@ -1,0 +1,42 @@
+function calcularEnvio(peso, tipo = "normal") {
+  const pesoNum = Number(peso);
+
+  if (isNaN(pesoNum) || pesoNum <= 0) {
+    throw new Error("El peso ingresado no es válido");
+  }
+
+  let costoBase;
+
+  if (pesoNum <= 2) {
+    costoBase = 8.0;
+  } else if (pesoNum <= 5) {
+    costoBase = 12.0;
+  } else {
+    costoBase = 18.0;
+  }
+
+  let costoFinal = costoBase;
+
+  if (tipo === "express") {
+    costoFinal = costoBase * 1.4;
+  }
+
+  return {
+    peso: pesoNum,
+    tipo,
+    costoBase,
+    costoFinal,
+  };
+}
+
+console.log("===== EJERCICIO 1 =====");
+
+console.log(calcularEnvio(1.5));
+
+console.log(calcularEnvio(4, "express"));
+
+try {
+  calcularEnvio(-3);
+} catch (error) {
+  console.log("Error capturado:", error.message);
+}
