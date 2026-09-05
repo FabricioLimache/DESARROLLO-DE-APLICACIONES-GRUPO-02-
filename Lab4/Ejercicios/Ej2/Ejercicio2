@@ -1,0 +1,32 @@
+const estudiantes = [
+  { nombre: "Andrea", nota: 17 },
+  { nombre: "Carlos", nota: 11 },
+  { nombre: "Lucía", nota: 19 },
+  { nombre: "Mateo", nota: 8 },
+  { nombre: "Valeria", nota: 14 },
+];
+
+console.log("\n===== EJERCICIO 2 =====");
+
+const nombres = estudiantes.map((e) => e.nombre);
+console.log("1. Nombres:", nombres);
+
+const aprobadosLista = estudiantes.filter((e) => e.nota >= 13);
+console.log("2. Nota >= 13:", aprobadosLista);
+
+const lucia = estudiantes.find((e) => e.nombre === "Lucía");
+console.log("3. Estudiante Lucía:", lucia);
+
+const promedio =
+  estudiantes.reduce((acum, e) => acum + e.nota, 0) / estudiantes.length;
+console.log("4. Promedio general:", promedio);
+
+const cantidadDesaprobados = estudiantes.filter((e) => e.nota < 13).length;
+console.log("5. Cantidad de desaprobados:", cantidadDesaprobados);
+
+const estudiantesConEstado = estudiantes.map((e) => ({
+  ...e,
+  estado: e.nota >= 13 ? "Aprobado" : "Desaprobado",
+}));
+
+console.log("7. Estudiantes con estado:", estudiantesConEstado);
