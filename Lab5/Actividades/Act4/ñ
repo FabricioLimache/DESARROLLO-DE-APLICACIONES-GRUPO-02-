@@ -1,42 +1,43 @@
-@mixin boton-estilo($color-fondo, $color-texto) {
-  background-color: $color-fondo;
-  color: $color-texto;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
+$color-principal: #2c3e50;
+$color-alerta: #e74c3c;
+$fuente-base: 'Arial', sans-serif;
  
-  &:hover {
-    background-color: darken($color-fondo, 10%);
-    cursor: pointer;
+body {
+  font-family: $fuente-base;
+  background-color: #f4f4f4;
+}
+ 
+// 3. Bloque .sidebar refactorizado con Nesting
+.sidebar {
+  background-color: $color-principal;
+  width: 250px;
+  padding: 20px;
+ 
+  ul {
+    list-style: none;
+    padding: 0;
+ 
+    li {
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+ 
+      a {
+        color: white;
+        text-decoration: none;
+        font-family: $fuente-base;
+        display: block;
+        padding: 5px;
+ 
+        &:hover {
+          color: $color-alerta;
+        }
+      }
+    }
   }
 }
  
-// 4. Placeholder base para mensajes
-%mensaje-base {
-  padding: 15px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  font-family: 'Arial', sans-serif;
+.alerta-mensaje {
+  color: $color-alerta;
+  border: 1px solid $color-alerta;
 }
  
-// 3. Aplicación del mixin a los botones
-.btn-aceptar {
-  @include boton-estilo(#2ecc71, white);
-}
- 
-.btn-cancelar {
-  @include boton-estilo(#e74c3c, white);
-}
- 
-// 4. Uso de @extend para heredar del placeholder
-.mensaje-error {
-  @extend %mensaje-base;
-  background-color: #f8d7da;
-  color: #721c24;
-}
- 
-.mensaje-exito {
-  @extend %mensaje-base;
-  background-color: #d4edda;
-  color: #155724;
-}
