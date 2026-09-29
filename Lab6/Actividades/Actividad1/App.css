@@ -1,0 +1,38 @@
+.contenedor {
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 0 1.25rem;
+  text-align: center;
+}
+
+.logo {
+  width: 5rem;
+  height: 5rem;
+}
+
+.contenedor h1 {
+  font-size: 2rem;
+  margin: 1rem 0 0.25rem;
+}
+
+.contenedor h2 {
+  font-size: 1.2rem;
+  color: var(--verde);
+  margin-bottom: 1rem;
+}
+
+.contenedor p {
+  color: var(--tinta-suave);
+  margin-bottom: 0.5rem;
+}
+
+.contenedor hr {
+  margin: 1.5rem 0;
+  border: none;
+  border-top: 1px solid var(--borde);
+}
+
+.banner {
+  max-width: 100%;
+  border-radius: 6px;
+}
