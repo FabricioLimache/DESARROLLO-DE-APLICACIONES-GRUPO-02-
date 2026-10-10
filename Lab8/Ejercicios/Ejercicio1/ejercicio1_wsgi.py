@@ -1,54 +1,3 @@
-"""
-Ejercicio 1: Micro-Framework WSGI con Middleware de Seguridad por Token
-y Deserializador Polimórfico
-=============================================================================
-
-Micro-servicio backend basado estrictamente en el estándar PEP 3333 (WSGI puro,
-sin Flask/Django) para la inscripción de aspirantes vía formularios web clásicos
-y aplicaciones móviles.
-
-Componentes:
-    1. MiddlewareTokenSeguridad  -> capa perimetral de autenticación (Cadena de
-       Responsabilidad). Intercepta toda petición antes de que llegue a la app.
-    2. aplicacion_inscripciones  -> motor de ingesta polimórfico (JSON / form-
-       urlencoded) + validación de esquema (Fail-Fast) sobre /api/inscripciones.
-
-Ejecución:
-    python3 ejercicio1_wsgi.py
-    -> Servidor de referencia (wsgiref) escuchando en http://127.0.0.1:8001
-
-Pruebas rápidas (con curl), una vez el servidor esté corriendo:
-
-    # 401 - sin token
-    curl -i -X POST http://127.0.0.1:8001/api/inscripciones \
-         -H "Content-Type: application/json" -d '{}'
-
-    # 201 - JSON válido
-    curl -i -X POST http://127.0.0.1:8001/api/inscripciones \
-         -H "Authorization: Bearer TOKEN_SECRETO_2026" \
-         -H "Content-Type: application/json" \
-         -d '{"dni":"12345678","correo_electronico":"a@a.com","programa_academico":"Sistemas"}'
-
-    # 201 - form-urlencoded válido
-    curl -i -X POST http://127.0.0.1:8001/api/inscripciones \
-         -H "Authorization: Bearer TOKEN_SECRETO_2026" \
-         -H "Content-Type: application/x-www-form-urlencoded" \
-         -d 'dni=87654321&correo_electronico=b@b.com&programa_academico=Industrial'
-
-    # 400 - falta una llave obligatoria
-    curl -i -X POST http://127.0.0.1:8001/api/inscripciones \
-         -H "Authorization: Bearer TOKEN_SECRETO_2026" \
-         -H "Content-Type: application/json" \
-         -d '{"dni":"12345678","correo_electronico":"a@a.com"}'
-
-    # 405 - verbo no permitido
-    curl -i -X GET http://127.0.0.1:8001/api/inscripciones \
-         -H "Authorization: Bearer TOKEN_SECRETO_2026"
-
-    # 404 - ruta inexistente
-    curl -i -X POST http://127.0.0.1:8001/api/otra-ruta \
-         -H "Authorization: Bearer TOKEN_SECRETO_2026"
-"""
 
 from __future__ import annotations
 
@@ -57,17 +6,13 @@ from typing import Callable, Iterable
 from urllib.parse import parse_qs
 from wsgiref.simple_server import make_server
 
-# -----------------------------------------------------------------------------
-# Configuración
-# -----------------------------------------------------------------------------
+
 TOKEN_VALIDO = "Bearer TOKEN_SECRETO_2026"
 LLAVES_OBLIGATORIAS = ("dni", "correo_electronico", "programa_academico")
 ENDPOINT_INSCRIPCIONES = "/api/inscripciones"
 
 
-# -----------------------------------------------------------------------------
-# Utilidades de respuesta WSGI
-# -----------------------------------------------------------------------------
+
 def _responder_json(start_response: Callable, status: str, payload: dict) -> Iterable[bytes]:
     """Serializa `payload` a JSON, arma las cabeceras y devuelve el iterable
     de bytes que exige la interfaz WSGI (PEP 3333)."""
@@ -92,9 +37,6 @@ def _responder_texto(start_response: Callable, status: str, mensaje: str) -> Ite
     return [cuerpo]
 
 
-# -----------------------------------------------------------------------------
-# 1) Middleware de Seguridad por Token (Cadena de Responsabilidad)
-# -----------------------------------------------------------------------------
 class MiddlewareTokenSeguridad:
     """Componente WSGI envolvente que intercepta TODAS las peticiones.
 
@@ -121,9 +63,6 @@ class MiddlewareTokenSeguridad:
         return self.app_envuelta(environ, start_response)
 
 
-# -----------------------------------------------------------------------------
-# 2) Motor de Ingesta Polimórfico (lectura segura de wsgi.input + parsing)
-# -----------------------------------------------------------------------------
 def _leer_cuerpo_peticion(environ: dict) -> bytes:
     """Lee el flujo binario de environ['wsgi.input'] respetando estrictamente
     CONTENT_LENGTH, para evitar bloqueos de socket (hang-ups) al intentar
@@ -177,9 +116,7 @@ def _validar_esquema(payload: dict) -> str | None:
     return None
 
 
-# -----------------------------------------------------------------------------
-# Aplicación principal (interna, protegida por el middleware)
-# -----------------------------------------------------------------------------
+
 def aplicacion_inscripciones(environ: dict, start_response: Callable) -> Iterable[bytes]:
     metodo = environ.get("REQUEST_METHOD", "")
     ruta = environ.get("PATH_INFO", "")
@@ -227,9 +164,7 @@ def aplicacion_inscripciones(environ: dict, start_response: Callable) -> Iterabl
     )
 
 
-# -----------------------------------------------------------------------------
-# Composición final: la app queda envuelta por el middleware de seguridad
-# -----------------------------------------------------------------------------
+
 app = MiddlewareTokenSeguridad(aplicacion_inscripciones)
 
 
