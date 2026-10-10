@@ -1,0 +1,9 @@
+body { font-family: system-ui, sans-serif; background: #f4f6f4; margin: 0; }
+.app { max-width: 520px; margin: 2rem auto; background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.encabezado h1 { margin: 0; color: #006400; }
+.formulario-tarea { display: flex; gap: .5rem; margin: 1rem 0; }
+.formulario-tarea input { flex: 1; padding: .5rem; }
+ul { list-style: none; padding: 0; }
+.tarea { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; border-bottom: 1px solid #eee; }
+.tarea.completada span { text-decoration: line-through; color: #888; }
+button { cursor: pointer; padding: .4rem .8rem; }
